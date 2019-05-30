@@ -55,7 +55,7 @@ type Server struct {
 	blacklistedDomains []string
 }
 
-//NewServerInput contains key configuration parameters to be passed to NewServer()
+// NewServerInput contains key configuration parameters to be passed to NewServer()
 type NewServerInput struct {
 	Key                string
 	URL                string
@@ -108,7 +108,7 @@ func NewServer(n NewServerInput) (*Server, error) {
 
 	// HTML - trying to make middleware flow/handler declaration a little more readable
 	s.Router.Handle("/",
-		alice.New( //Middleware below
+		alice.New( // Middleware below
 			Refresh(20),
 			CacheControl(14),
 			SetVersionHeader,
@@ -185,8 +185,8 @@ func (s *Server) isBlacklisted(email string) bool {
 	return false
 }
 
-//createRouteAndUpdate is intended to be run in a goroutine. It creates a mailgun route and updates dynamodb with
-//the result. Otherwise it fails silently and this failure is picked up in the next request.
+// createRouteAndUpdate is intended to be run in a goroutine. It creates a mailgun route and updates dynamodb with
+// the result. Otherwise it fails silently and this failure is picked up in the next request.
 func (s *Server) createRouteAndUpdate(i data.Inbox) {
 	routeID, err := s.email.RegisterRoute(i)
 	if err != nil {
@@ -202,14 +202,14 @@ func (s *Server) createRouteAndUpdate(i data.Inbox) {
 	}
 }
 
-//lambdaCreateRouteAndUpdate makes use of the waitgroup then calls createRouteAndUpdate. This is because lambda
-//will exit as soon as we return the response so we must make it wait
+// lambdaCreateRouteAndUpdate makes use of the waitgroup then calls createRouteAndUpdate. This is because lambda
+// will exit as soon as we return the response so we must make it wait
 func (s *Server) lambdaCreateRouteAndUpdate(wg *sync.WaitGroup, i data.Inbox) {
 	defer wg.Done()
 	s.createRouteAndUpdate(i)
 }
 
-//DeleteOldRoutes deletes routes older than 24 hours
+// DeleteOldRoutes deletes routes older than 24 hours
 func (s *Server) DeleteOldRoutes() error {
 	return s.email.DeleteExpiredRoutes()
 }

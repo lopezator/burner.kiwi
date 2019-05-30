@@ -77,7 +77,7 @@ Parameter | Type | Description
 ----------|------|-------------
 LAMBDA | Boolean | Whether or not the binary is being hosted on AWS Lambda
 KEY | String | Key used to sign cookies and keys. Make this something strong!
-WEBSITE_URL | String | The url where the binary is being hosted. This must be internet reachable as it is the destination for Mailgun routes
+WEBSITE_URL | String | The url where the binary is being hosted. This must be internet reachable as it is the destination for Mailgun or Sendgrid routes
 STATIC_URL | String | The url where static content is being hosted. Set to `/static` to have the binary serve it. Otherwise set to a full domain name with protocol e.g https://static.example.com
 DEVELOPING | Boolean | Set to `true` to disable HSTS and set `Cache-Control` to zero. 
 DOMAINS | []String | Comma separated list of domains connected to Mailgun account and able to receive email

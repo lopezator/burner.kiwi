@@ -15,7 +15,7 @@ import (
 	"github.com/haydenwoodhead/burner.kiwi/metrics"
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
-	mailgun "gopkg.in/mailgun/mailgun-go.v1"
+	"gopkg.in/mailgun/mailgun-go.v1"
 )
 
 var _ email.Provider = &MailgunMail{}

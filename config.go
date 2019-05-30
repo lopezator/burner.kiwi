@@ -13,6 +13,7 @@ import (
 	"github.com/haydenwoodhead/burner.kiwi/data/sqlite3"
 	"github.com/haydenwoodhead/burner.kiwi/email"
 	"github.com/haydenwoodhead/burner.kiwi/email/mailgunmail"
+	"github.com/haydenwoodhead/burner.kiwi/email/sendgridmail"
 	"github.com/haydenwoodhead/burner.kiwi/server"
 )
 
@@ -22,6 +23,7 @@ const dynamoDB = "dynamo"
 const sqLite3 = "sqlite3"
 
 const mailgunProvider = "mailgun"
+const sendgridProvider = "sendgrid"
 
 func mustParseNewServerInput() server.NewServerInput {
 	dbType := parseStringVarWithDefault("DB_TYPE", inMemory)
@@ -46,6 +48,8 @@ func mustParseNewServerInput() server.NewServerInput {
 	switch emailType {
 	case mailgunProvider:
 		email = mailgunmail.NewMailgunProvider(mustParseStringVar("MG_DOMAIN"), mustParseStringVar("MG_KEY"))
+	case sendgridProvider:
+		email = sendgridmail.NewSendgridProvider(mustParseStringVar("MG_DOMAIN"), mustParseStringVar("MG_KEY"))
 	}
 
 	return server.NewServerInput{

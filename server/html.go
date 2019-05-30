@@ -17,7 +17,7 @@ import (
 	"github.com/haydenwoodhead/burner.kiwi/stringduration"
 )
 
-//staticDetails contains the names of the static files used in the project
+// staticDetails contains the names of the static files used in the project
 type staticDetails struct {
 	URL       string
 	Milligram string
@@ -26,7 +26,7 @@ type staticDetails struct {
 	Custom    string
 }
 
-//getStaticDetails returns current static details
+// getStaticDetails returns current static details
 func (s *Server) getStaticDetails() staticDetails {
 	return staticDetails{
 		URL:       s.staticURL,
@@ -281,7 +281,7 @@ func (s *Server) IndividualMessage(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-//DeleteInbox prompts for a confirmation to delete from the user
+// DeleteInbox prompts for a confirmation to delete from the user
 func (s *Server) DeleteInbox(w http.ResponseWriter, r *http.Request) {
 	err := deleteTemplate.ExecuteTemplate(w, "base", struct {
 		Static staticDetails
@@ -295,7 +295,7 @@ func (s *Server) DeleteInbox(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-//ConfirmDeleteInbox removes the user session cookie
+// ConfirmDeleteInbox removes the user session cookie
 func (s *Server) ConfirmDeleteInbox(w http.ResponseWriter, r *http.Request) {
 	sess, ok := r.Context().Value(sessionCTXKey).(*sessions.Session)
 	if !ok {
